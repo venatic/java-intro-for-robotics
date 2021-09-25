@@ -6,6 +6,10 @@ public class FMSTimer {
 
     public static void main(String[] args) throws Exception {
 
+        BasicBot fawkes = new BasicBot("Fawkes");
+        BasicBot chungus = new BasicBot("Chungus", 10, 10, 45 ); 
+        BasicBot carl = new BasicBot("CARRRRRRRL", 100, 10, 90);
+
         long matchStartTime;
         
         // 2 minutes and 30 seconds (*1000)
@@ -19,6 +23,11 @@ public class FMSTimer {
             System.out.println(""+ countdown +"...");
             TimeUnit.SECONDS.sleep(1);
         }
+
+        fawkes.enable();
+        chungus.enable();
+        carl.enable();
+
 
         // start the match
         currentMatchState = gameStates.matchStart;
@@ -42,8 +51,22 @@ public class FMSTimer {
             }
 
             System.out.println("" + currentMatchState + ": " + currentMatchTime);
+
+            fawkes.updateDrivePosition(20, 0);
+            chungus.updateDrivePosition(0, 35);
+            carl.updateDrivePosition(0.5, 45);
+
+            System.out.println(fawkes.getPrintableRobotPosition());
+            System.out.println(chungus.getPrintableRobotPosition());
+            System.out.println(carl.getPrintableRobotPosition());
+
+
             TimeUnit.SECONDS.sleep(1);
         }
+
+        fawkes.disable();
+        chungus.disable();
+        carl.disable();
         
         currentMatchState = gameStates.endOfMatch;
         currentMatchTime = (System.currentTimeMillis() - matchStartTime) / 1000;
